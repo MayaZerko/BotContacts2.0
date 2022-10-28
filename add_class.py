@@ -19,7 +19,6 @@ class Record:
         self.name = Name(name)
         self.phones = []
 
-
     def get_info(self):
         phones_info = ''
 
@@ -35,12 +34,9 @@ class Record:
         self.phones = []
 
 
-
 class AddressBook(UserDict):
     def add_record(self, record):
         self.data[record.name.value] = record
-        # if record.name.value in self.data:
-        #     record = self.data[record.name.value]
 
     def get_all_record(self):
         return self.data
@@ -50,3 +46,17 @@ class AddressBook(UserDict):
 
     def get_record(self, name) -> Record:
         return self.data.get(name)
+
+    def remove_record(self, name):
+        del self.data[name]
+
+    def search(self, value):
+        if self.has_record(value):
+            return self.get_record(value)
+
+        for record in self.get_all_record().values():
+            for phone in record.phones:
+                if phone.value == value:
+                    return record
+
+        raise ValueError("Contact with this value does not exist.")

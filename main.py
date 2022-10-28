@@ -84,15 +84,13 @@ def change_phones_func(data):
 
 
 @input_error
-def search_func(name):
+def search_func(value):
     """
     Коли користувач шукає конкретний контакт за ім'ям.
-    :param name: Контакт котрий шукаємо.
+    :param value: Контакт котрий шукаємо.
     :return: Номер контакту.
     """
-    if name.strip() not in contacts_dict:
-        raise ValueError('This contact does not exist.')
-    return contacts_dict.get(name.strip())
+    return contacts_dict.search(value.strip()).get_info()
 
 
 @input_error
@@ -110,6 +108,17 @@ def show_func():
     return contacts
 
 
+@input_error
+def del_func(name):
+    name = name.strip()
+
+    if contacts_dict.has_record(name):
+        contacts_dict.remove_record(name)
+        return "You deleted the contact."
+
+    raise ValueError('This contact does not exist.')
+
+
 COMMANDS_DICT = {
     'hello': hello_func,
     'exit': exit_func,
@@ -118,7 +127,8 @@ COMMANDS_DICT = {
     'add': add_func,
     'change phones': change_phones_func,
     'show all': show_func,
-    'phone': search_func
+    'phone': search_func,
+    'delete': del_func
 }
 
 
