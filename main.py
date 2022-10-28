@@ -47,7 +47,7 @@ def exit_func():
 @input_error
 def add_func(data):
     """
-    Додавання нового контакту. Обробка строки и створення контакту.
+    Додавання нового контакту. Обробка строки и створення контакту. Взаємодія з класами.
     :param data: Строка з ім'ям та телефоном.
     :return: Відповідь, що контакт створено.
     """
@@ -67,7 +67,7 @@ def add_func(data):
 @input_error
 def change_phones_func(data):
     """
-    Зміна вже існуючого контактного номера.
+    Зміна вже існуючого контактного номера. Взаємодія з класами.
     :param data: Строка з ім'ям та телефоном.
     :return: Відповідь про зміни.
     """
@@ -86,9 +86,9 @@ def change_phones_func(data):
 @input_error
 def search_func(value):
     """
-    Коли користувач шукає конкретний контакт за ім'ям.
+    Коли користувач шукає конкретний контакт за значенням.
     :param value: Контакт котрий шукаємо.
-    :return: Номер контакту.
+    :return: Повертає дані контакту.
     """
     return contacts_dict.search(value.strip()).get_info()
 
@@ -103,13 +103,14 @@ def show_func():
     for key, record in contacts_dict.get_all_record().items():
         contacts += f'{record.get_info()}\n'
 
-    # for key, value in contacts_dict.items():
-    #     contacts += f'{key} : {value} \n'
     return contacts
 
 
 @input_error
 def del_func(name):
+    """
+    Функція для видалення контакту за імʼям. Взаємодіє з класами.
+    """
     name = name.strip()
 
     if contacts_dict.has_record(name):
