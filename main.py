@@ -65,16 +65,21 @@ def add_func(data):
 
 
 @input_error
-def change_func(data):
+def change_phones_func(data):
     """
     Зміна вже існуючого контактного номера.
     :param data: Строка з ім'ям та телефоном.
     :return: Відповідь про зміни.
     """
-    name, phone = create_data(data)
-    if name in contacts_dict:
-        contacts_dict[name] = phone
-        return f'You changed number to {phone} for {name}.'
+    name, phones = create_data(data)
+    if contacts_dict.has_record(name):
+        record = contacts_dict.get_record(name)
+        record.clear_phones()
+
+        for phone in phones:
+            record.add_phone(phone)
+
+        return f'You changed numbers to {phones} for {name}.'
     return 'Use add command plz.'
 
 
@@ -111,7 +116,7 @@ COMMANDS_DICT = {
     'close': exit_func,
     'good bye': exit_func,
     'add': add_func,
-    'change': change_func,
+    'change phones': change_phones_func,
     'show all': show_func,
     'phone': search_func
 }

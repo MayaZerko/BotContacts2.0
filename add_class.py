@@ -31,6 +31,9 @@ class Record:
     def add_phone(self, phone):
         self.phones.append(Phone(phone))
 
+    def clear_phones(self):
+        self.phones = []
+
 
 
 class AddressBook(UserDict):
@@ -41,3 +44,9 @@ class AddressBook(UserDict):
 
     def get_all_record(self):
         return self.data
+
+    def has_record(self, name):
+        return bool(self.data.get(name))
+
+    def get_record(self, name) -> Record:
+        return self.data.get(name)
