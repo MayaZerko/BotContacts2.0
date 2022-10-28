@@ -1,4 +1,6 @@
-contacts_dict = {}
+from add_class import *
+
+contacts_dict = AddressBook()
 
 
 def input_error(function):
@@ -53,7 +55,8 @@ def add_func(data):
 
     if name in contacts_dict:
         raise ValueError('This contact already exist.')
-    contacts_dict[name] = phone
+    record = Record(name, phone)
+    contacts_dict.add_record(record)
     return f'You added new contact: {name} with this {phone}.'
 
 
