@@ -51,13 +51,17 @@ def add_func(data):
     :param data: Строка з ім'ям та телефоном.
     :return: Відповідь, що контакт створено.
     """
-    name, phone = create_data(data)
+    name, phones = create_data(data)
 
     if name in contacts_dict:
         raise ValueError('This contact already exist.')
-    record = Record(name, phone)
+    record = Record(name)
+
+    for phone in phones:
+        record.add_phone(phone)
+
     contacts_dict.add_record(record)
-    return f'You added new contact: {name} with this {phone}.'
+    return f'You added new contact: {name} with this {phones}.'
 
 
 @input_error
@@ -140,12 +144,13 @@ def create_data(data):
     """
     new_data = data.strip().split(" ")
     name = new_data[0]
-    phone = new_data[1]
+    phones = new_data[1:]
     if name.isnumeric():
         raise ValueError('Wrong name.')
-    if not phone.isnumeric():
-        raise ValueError('Wrong phone.')
-    return name, phone
+    for phone in phones:
+        if not phone.isnumeric():
+            raise ValueError('Wrong phones.')
+    return name, phones
 
 
 def break_func():

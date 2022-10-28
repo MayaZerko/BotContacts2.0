@@ -15,11 +15,10 @@ class Phone(Field):
 
 
 class Record:
-    def __init__(self, name, *args):
+    def __init__(self, name):
         self.name = Name(name)
         self.phones = []
-        for arg in args:
-            self.phones.append(Phone(arg))
+
 
     def get_info(self):
         phones_info = ''
@@ -28,6 +27,9 @@ class Record:
             phones_info += f'{phone.value}, '
 
         return f'{self.name.value} : {phones_info[:-2]}'
+
+    def add_phone(self, phone):
+        self.phones.append(Phone(phone))
 
 
 
