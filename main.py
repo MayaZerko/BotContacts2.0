@@ -1,4 +1,4 @@
-from add_class import *
+from add_class import AddressBook, Record
 
 contacts_dict = AddressBook()
 
@@ -93,8 +93,11 @@ def show_func():
     :return: Список контактів.
     """
     contacts = ''
-    for key, value in contacts_dict.items():
-        contacts += f'{key} : {value} \n'
+    for key, record in contacts_dict.get_all_record().items():
+        contacts += f'{record.get_info()}\n'
+
+    # for key, value in contacts_dict.items():
+    #     contacts += f'{key} : {value} \n'
     return contacts
 
 
