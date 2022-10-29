@@ -108,11 +108,10 @@ def del_func(name):
     """
     name = name.strip()
 
-    if contacts_dict.has_record(name):
-        contacts_dict.remove_record(name)
-        return "You deleted the contact."
+    contacts_dict.remove_record(name)
+    return "You deleted the contact."
 
-    raise ValueError('This contact does not exist.')
+
 @input_error
 def del_phone_func(data):
     name, phone = data.strip().split(' ')
